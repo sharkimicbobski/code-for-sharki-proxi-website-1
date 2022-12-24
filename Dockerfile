@@ -23,7 +23,7 @@ RUN mv dist .. && rm -rf * .git && mv ../dist/ .
 # modify nginx.conf
 WORKDIR /opt/womginx
 
-RUN ./docker-sed.sh
+RUN chmod +x ./docker-sed.sh && ./docker-sed.sh
 
 FROM nginx:stable-alpine
 
