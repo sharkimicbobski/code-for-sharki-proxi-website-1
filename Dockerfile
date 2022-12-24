@@ -20,11 +20,6 @@ RUN npm install --legacy-peer-deps && npm run build-prod
 # delete everything but the dist folder to save us an additional 50MB+
 RUN mv dist .. && rm -rf * .git && mv ../dist/ .
 
-# modify nginx.conf
-WORKDIR /opt/womginx
-
-RUN chmod +x ./docker-sed.sh && ./docker-sed.sh
-
 FROM nginx:stable-alpine
 
 # default environment variables in case a normal user doesn't specify it
@@ -35,7 +30,4 @@ ENV PORT=80
 COPY --from=builder /opt/womginx /opt/womginx
 RUN cp /opt/womginx/nginx.conf /etc/nginx/nginx.conf
 
-# make sure nginx.conf works (mainly used for development)
-RUN nginx -t
-RUN chmod +x /opt/womginx/docker-entrypoint.sh
-CMD /opt/womginx/docker-entrypoint.sh
+CMD chmod +x /opt/womginx/docker-sed.sh && /opt/womginx/docker-sed.sh && chmod +x /opt/womginx/docker-entrypoint.sh && /opt/womginx/docker-entrypoint.sh
