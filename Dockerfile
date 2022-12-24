@@ -29,5 +29,4 @@ ENV PORT=80
 
 COPY --from=builder /opt/womginx /opt/womginx
 RUN cp /opt/womginx/nginx.conf /etc/nginx/nginx.conf
-
-CMD chmod +x /opt/womginx/docker-sed.sh && /opt/womginx/docker-sed.sh && chmod +x /opt/womginx/docker-entrypoint.sh && /opt/womginx/docker-entrypoint.sh
+CMD cp /opt/womginx/nginx.conf /etc/nginx/nginx.conf && chmod +x /opt/womginx/docker-sed.sh && /opt/womginx/docker-sed.sh && chmod +x /opt/womginx/docker-entrypoint.sh && /opt/womginx/docker-entrypoint.sh
