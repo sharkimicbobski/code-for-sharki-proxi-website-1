@@ -37,5 +37,5 @@ RUN cp /opt/womginx/nginx.conf /etc/nginx/nginx.conf
 
 # make sure nginx.conf works (mainly used for development)
 RUN nginx -t
-
+RUN chmod +x /opt/womginx/docker-entrypoint.sh
 CMD /opt/womginx/docker-entrypoint.sh
